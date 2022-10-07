@@ -18,10 +18,11 @@ Network Intrusion Detection Systems are located on a certain place in the networ
 There is another big difference, the NIDS are way more real time than the HIDS because the HIDS is trying to find intrusions after the fact (after they've already happened). While NIDS are checking the packets themselves.
 
 **Deployment to my own network**
-
+While following a [tutorial](https://techviewleo.com/install-and-configure-ossec-hids-agent-on-ubuntu/) on installing an HIDS on my own website I ran into the following problem, not knowing how to fix this I decided to move on. A reason for this error could be that I might not have the right ubuntu version. Below you can see the error that occured.
+![](/media/HIDS.png)
 
 __AFTERTHOUGHTS__
-After doing the excersises I feel like I've learned quite a lot and am happy with the results.
+After doing the excersises I feel like I've learned quite a lot but I'm not happy with the results of installing the HIDS myself. Dissapointed that I was not able to do it.
 
 __SOURCES__
 - [[Reference] Host Intrusion Detection and Prevention (HIDS)](https://fhict.instructure.com/courses/12541/pages/reference-host-intrusion-detection-and-prevention-hids)
