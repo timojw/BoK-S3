@@ -1,49 +1,48 @@
 ## Body of Knowledge: ##
-__Threat + Risk Analysis for the test Web Shop__
+__Path Traversal, File Inclusion, Command Injection__
 
 __RELEVANCE__
 
-Before starting the semester it is imporant to be aware of certain Cyber Security Threats. And how to analize the risks for security threats.
 
 __STARTING POINT__
-
-Before researching this I had heard of only some very well known cyber security threats such as: spam, some malware and DDOS attacks. Although I did not know much about that and would like to learn more about them as well as many more threats. I have also previously setup a test web shop.
+Before this assignment I have had zero to no experience with these subjects and I'm going into it with only the knowledge that a website is a bunch of files. I learned that during my previous semesters.
 
 __APPROACH__
-
-I'm planning to find out more about them by researching the canvas pages, presentations prepared by teachers as well as doing my own research online outside of canvas. After which I will try to do some Risk Analysis on my own test web shop.
-
-__BACKGROUND INFORMATION__
-
-There are a lot more examples of cyber threats: malware, spam, phishing, adware, ransomware and many more. It is important to know how to detect them and find out what risks a online environment is taking.
-
-After taking a look I found out that there are three points of reliability: Confidentiality, Integrity, Availibility. Afgekort: CIA
-At the core of information security is information assurance, the act of maintaining the confidentiality, integrity and availability (CIA) of information. 
-- Confidentiality:
-  Confidentiality is a component of privacy that implements to protect our data from unauthorized viewers.
-- Integrity:
-  In information security, data integrity means maintaining and assuring the accuracy and completeness of data.
-- Availability:
-  The information must be available when it is needed. This means the computing systems used to store and process the information, the security controls used to protect it, and the communication channels used to access it must be functioning correctly.
-
-Also found out that there are a few different ways to mitigate risks: First of all it is an option to accept the risk, avoid the risk, transfer the risk somewhere else, it might also be possible to reduce the risk. 
-There are certain types of risk analysis: Qualitative risk analysis, which means you qualify the risks incurred by a High, Medium or a Low risk. 
-There is also Quantitative risk analysis which is the most extended form of risk analysis. There is a easy formula used for quantitive risk analysis: Risk = Probability x Damage.
+My approach for this assignment will be to search for what the different attacks are and how to prevent them, I will do this using links in canvas pages but also looking for some new sources online. After this I will try to apply all of these techniques in a DVWA website.
 
 __EXECUTION__
+**What is path traversal and how does it work?**
+Path traversal also known as directorty traversal aims to access files and directories that are stored outside the root folder. You do this by changing variables that reference files (../). Using this method it could be possible to access the application source code or configuration files.
 
-Quantitative risk analysis on the restaurant I work at.
-For this part I will follow the formula explained above: Risk = Probability x Damage
-The probability of someone trying to break into the website for the restaurant is low, around 10% cause there are not a lot of people with any motivation to do so. 
-If someone was to succeed in doing so, there will be little damage done. The website does contain any sensitive information of previous customers. there is also the probability of paying information being left vulnerable. This is why I would say the potential damage is big.
-Risk = 10 x 80 = 800
+Using path traversal I was able to access the password file (/etc/passwd) in the root folder. As you can see below I needed to go back quite far from where I started. Later I found that just going to page=/etc/passwd also worked.
+![](/media/file%20inclusion2.png)
+![](/media/file%20inclusion3.png)
+Using path traversal I was able to access the fourth hidden file. This was done by editing the webadress in a certain way to show another file as seen below.
+![](/media/file%20inclusion.png)
+I also was able to access the page=/proc/version file which grants access to the operating system details of the victem.
+![](/media/file%20inclusion4.png)
+Later I found this funny file which is located one directory down so I had to include 2 times ../ before finding it.
+![](/media/file%20inclusion6.png)
+To make your application less vulnerable to these sort of attacks it would be wise not to work with user input when the system is calling for certain stored files. You could also use ID's in the structure of the application. To make sure that the hacker can not supply all parts of the code, surround it with your path code. There are more options to defend against such attacks.
 
-This means that there is quite a bit of risk at the moment.
+**What is remote file inclusion and how does it work?**
+Remote file inclusion is an attack targeting vulnerabilities in web applications that dynamically reference external scripts. The attacker's goal is to exploit the referencing function in an application to upload malware from a remote URL located within a different domain.
+
+**What is command injection and how does it work?**
+Command injection is an attack in which the goal is execution of commands on the host operating system. Command injection attacks are possible when an application passes unsafe user supplied data to a system shell. Command injection attacks are possible largely due to insufficient input validation.
+
+As you see below I was able to add more commands after the ip address like hostname which provides the operating system for the application. Alteratively you could use the && symbol instead of the ; between commands.
+![](/media/commandinjection2.png)
+Another way of using command injection is the ls command which shows you what files are located in the current directory. You could also show it for other directories as shown below. It could be very usefull to combine with path traversal cause this was you know what files are where.
+![](/media/commandinjection.png)
+
+**How are path traversal, remote file inclusion and command injection related?**
+After getting to know these vulnerabilities I would say that all of them are in some way related to browsing and accessing the files for the website. A path traversal vulnerability allows an attacker to access files on your web server to which they should not have access. Remote file inclusion is basically the same only the big difference is the ability to execute the source codes that are not saved in interpretable files. And command injection can be used to navigate the files as well by using ls or other commands.  
 
 __AFTERTHOUGHTS__
-Doing the exercise for Quantitative risk analysis was quite useless with the example I chose. It would be way more interesting to do that for a company or website that has a more interestin IT environment.
+After only doing some very basic excersises for these subjects I'm left wondering what else is possible and excited to do some more in the future, but due to my thight schedule I have to keep going for now.
 
 __SOURCES__
-- [[Reference] Security Threats](https://fhict.instructure.com/courses/12541/pages/reference-security-threats?module_item_id=838297)
-- [[Reference] IT Risk Analysis](https://fhict.instructure.com/courses/12541/pages/reference-it-risk-analysis)
-- [ICS Risk Analysis workshop 2022Til](https://portal.fhict.nl/Studentenplein/LMC/2223nj/Cyber%20Security/CS4/Toolbox-Risk-Consultant/[Reference]_IT_Risk_Analysis/ICS%20Risk%20Analysis%20workshop%202022Til.pptx?Web=1)
+- [Path Traversal](https://owasp.org/www-community/attacks/Path_Traversal)
+- [Remote file inclusion (RFI)](https://www.imperva.com/learn/application-security/rfi-remote-file-inclusion/)
+- [Command Injection](https://owasp.org/www-community/attacks/Command_Injection)
